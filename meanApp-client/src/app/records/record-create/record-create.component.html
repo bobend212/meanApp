@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Measurement</mat-label>
+    <input type="number" matInput [(ngModel)]="enteredValue" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onAddRecord()">
+    Save Record
+  </button>
+</mat-card>
+<p>{{ enteredValue }}</p>

@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+  width: 95%;
+  margin: auto;
+  background-color: #cce7e8;
+}
+body {
+  font-family: "Merriweather", serif;
+}
