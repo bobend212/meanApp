@@ -3,7 +3,11 @@
     <mat-expansion-panel-header>
       {{ record.title }}
     </mat-expansion-panel-header>
-    <p>{{ record.content }}</p>
+    <p>{{ record.measure }}</p>
+    <mat-action-row>
+      <button mat-button>Edit</button>
+      <button mat-button>Delete</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="mat-subheading-2" *ngIf="records.length <= 0">no content yet</p>

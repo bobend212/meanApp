@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Record } from "../record.model";
+import { RecordsService } from "../records.service";
 
 @Component({
     selector: 'app-record-create',
@@ -6,11 +9,12 @@ import { Component } from "@angular/core";
     styleUrls: ['./record-create.component.css']
 })
 export class RecordCreateComponent {
-    enteredValue = '';
-    newRecord = 'empty string';
 
-    onAddRecord() {
-        this.newRecord = this.enteredValue;
-        console.log(this.enteredValue)
+    constructor(public recordsService: RecordsService) {}
+
+    onAddRecord(form: NgForm) {
+        if (form.invalid) return;
+        this.recordsService.addRecord(form.value.title, form.value.measure);
+        form.resetForm();
     }
 }

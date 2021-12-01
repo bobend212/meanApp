@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Record } from '../record.model';
+import { RecordsService } from '../records.service';
 
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.component.html',
   styleUrls: ['./record-list.component.css']
 })
-export class RecordListComponent implements OnInit {
+export class RecordListComponent implements OnInit, OnDestroy {
 
-  // records = [
-  //   {title: 'First Record', content: 'first content'},
-  //   {title: 'Sec Record', content: 'sec content'},
-  //   {title: 'Third Record', content: 'third content'},
-  //   {title: 'Fourth Record', content: 'fourth content'},
-  //   {title: 'Fivth hRecord', content: 'fivth content'},
-  // ];
+  records: Record[] = [];
+  private recordsSub: Subscription
 
-  records = [];
+  constructor(public recordsService: RecordsService) { }
 
-  constructor() { }
+  ngOnDestroy() {
+    this.recordsSub.unsubscribe();
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.records = this.recordsService.getRecords();
+    this.recordsSub = this.recordsService.getRecordUpdateListener().subscribe((records: Record[]) => {
+      this.records = records;
+    });
   }
 
 }

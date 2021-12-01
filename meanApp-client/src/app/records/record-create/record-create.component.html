@@ -1,10 +1,31 @@
 <mat-card>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Measurement</mat-label>
-    <input type="number" matInput [(ngModel)]="enteredValue" />
-  </mat-form-field>
+  <form (submit)="onAddRecord(recordForm)" #recordForm="ngForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        required
+        #title="ngModel"
+      />
+      <mat-error *ngIf="title.invalid">Title is required</mat-error>
+    </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="onAddRecord()">
-    Save Record
-  </button>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Measurement</mat-label>
+      <input
+        type="number"
+        matInput
+        name="measure"
+        ngModel
+        required
+        #measure="ngModel"
+      />
+      <mat-error *ngIf="measure.invalid">Measure is required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Save Record</button>
+  </form>
 </mat-card>
