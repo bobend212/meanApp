@@ -11,5 +11,6 @@ export class RecordCreateComponent {
 
     onAddRecord() {
         this.newRecord = this.enteredValue;
+        console.log(this.enteredValue)
     }
 }
