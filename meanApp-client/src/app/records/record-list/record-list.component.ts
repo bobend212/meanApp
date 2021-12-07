@@ -20,7 +20,7 @@ export class RecordListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.records = this.recordsService.getRecords();
+    this.recordsService.getRecords();
     this.recordsSub = this.recordsService.getRecordUpdateListener().subscribe((records: Record[]) => {
       this.records = records;
     });
