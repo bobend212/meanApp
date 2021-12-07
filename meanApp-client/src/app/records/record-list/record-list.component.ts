@@ -26,4 +26,8 @@ export class RecordListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDelete(recordId: string) {
+    this.recordsService.deleteRecord(recordId);
+  }
+
 }

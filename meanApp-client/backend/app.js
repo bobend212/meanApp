@@ -6,7 +6,7 @@ const Record = require('./models/record');
 
 const app = express();
 // SBKj7CsrjnZuWdiq
-mongoose.connect('mongodb+srv://matkon:SBKj7CsrjnZuWdiq@cluster0.luhwv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://matkon:SBKj7CsrjnZuWdiq@cluster0.luhwv.mongodb.net/DiaBeatDB?retryWrites=true&w=majority')
     .then(() => {
         console.log('Connected to DB!');
     })
@@ -30,25 +30,29 @@ app.post('/api/records', (req, res, next) => {
         title: req.body.title,
         measure: req.body.measure
     });
-    console.log(record);
-    res.status(201).json({
-        message: 'Record added successfully'
+    record.save().then(createdRecord => {
+        res.status(201).json({
+            message: 'Record added successfully',
+            recordId: createdRecord._id
+        });
     });
 });
 
 //GET RECORDS
 app.get('/api/records', (req, res, next) => {
-    const records = [
-        { id: 'dagdf1232', title: 'TITLE1', measure: '200'},
-        { id: 'fdfsd123', title: 'TITLE2', measure: '150'},
-        { id: 'dhfg123123', title: 'TITLE3', measure: '95'},
-        { id: 'jjhf234', title: 'TITLE4', measure: '111'},
-        { id: 'djghjh34', title: 'TITLE5', measure: '234'},
-    ];
-    
-    res.status(200).json({
-        message: 'Records fetched!',
-        records: records
+    Record.find().then(documents => {
+        res.status(200).json({
+            message: 'Records fetched!',
+            records: documents
+        });
+    });
+});
+
+//DELETE
+app.delete('/api/records/:id', (req, res, next) => {
+    Record.deleteOne({_id: req.params.id}).then(result => {
+        console.log(result);
+        res.status(200).json({message: 'Record deleted!'})
     });
 });
 

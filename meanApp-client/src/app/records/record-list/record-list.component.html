@@ -6,7 +6,7 @@
     <p>{{ record.measure }}</p>
     <mat-action-row>
       <button mat-button>Edit</button>
-      <button mat-button>Delete</button>
+      <button mat-button (click)="onDelete(record.id)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
